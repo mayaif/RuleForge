@@ -30,6 +30,9 @@ export const useBuilderStore = defineStore('builder', {
     orders: [] as Order[],
     ordersLoaded: false,
     explanation: '' as string,
+    savedRuleId: null as string | null,
+    saving: false,
+    lastSavedAt: null as Date | null,
   }),
 
   getters: {
@@ -59,6 +62,36 @@ export const useBuilderStore = defineStore('builder', {
     reset() {
       this.rule = defaultRule()
       this.explanation = ''
+      this.savedRuleId = null
+      this.lastSavedAt = null
+    },
+
+    async loadRule(id: string) {
+      const doc = await $fetch<{ id: string; name: string; rule: RuleTree }>(`/api/saved-rules/${id}`)
+      this.rule = doc.rule
+      this.savedRuleId = doc.id
+      this.explanation = ''
+    },
+
+    async saveRule() {
+      this.saving = true
+      try {
+        if (this.savedRuleId) {
+          await $fetch(`/api/saved-rules/${this.savedRuleId}`, {
+            method: 'PUT',
+            body: { name: this.rule.name, rule: this.rule },
+          })
+        } else {
+          const res = await $fetch<{ id: string }>('/api/saved-rules', {
+            method: 'POST',
+            body: { name: this.rule.name, rule: this.rule },
+          })
+          this.savedRuleId = res.id
+        }
+        this.lastSavedAt = new Date()
+      } finally {
+        this.saving = false
+      }
     },
 
     applyGeneratedRule(rule: RuleTree, explanation: string) {

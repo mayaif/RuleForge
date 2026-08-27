@@ -26,3 +26,8 @@ export async function getOrdersCollection() {
   const db = await getDb()
   return db.collection('orders')
 }
+
+export async function getSavedRulesCollection() {
+  const db = await getDb()
+  return db.collection('saved_rules')
+}

@@ -5,21 +5,32 @@ import TriageQueue from '../../components/builder/TriageQueue.vue'
 import AiAssist from '../../components/builder/AiAssist.vue'
 
 const builder = useBuilderStore()
-onMounted(() => builder.fetchOrders())
+const route = useRoute()
+
+onMounted(async () => {
+  builder.fetchOrders()
+  const id = route.query.id
+  if (typeof id === 'string') {
+    await builder.loadRule(id)
+  } else {
+    builder.reset()
+  }
+})
+
+const saveLabel = computed(() => {
+  if (builder.saving) return 'Saving…'
+  return builder.savedRuleId ? 'Save changes' : 'Save rule'
+})
 </script>
 
 <template>
   <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
-    <header class="flex items-center justify-between">
-      <NuxtLink to="/" class="text-sm text-muted-foreground hover:text-foreground">← RuleForge</NuxtLink>
-    </header>
-
     <AiAssist />
 
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
       <section aria-labelledby="rule-heading" class="flex flex-col gap-4">
-        <div class="flex items-center justify-between">
-          <div>
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="min-w-0 flex-1">
             <label for="rule-name" class="sr-only">Rule name</label>
             <input
               id="rule-name"
@@ -27,6 +38,17 @@ onMounted(() => builder.fetchOrders())
               class="w-full rounded-md border border-input bg-background px-3 py-1.5 text-lg font-semibold"
               @input="builder.setName(($event.target as HTMLInputElement).value)"
             />
+          </div>
+          <div class="flex items-center gap-2">
+            <span v-if="builder.lastSavedAt" class="text-xs text-muted-foreground">Saved</span>
+            <button
+              type="button"
+              class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground disabled:opacity-60"
+              :disabled="builder.saving"
+              @click="builder.saveRule()"
+            >
+              {{ saveLabel }}
+            </button>
           </div>
         </div>
 

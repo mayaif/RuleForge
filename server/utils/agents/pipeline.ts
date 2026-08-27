@@ -1,11 +1,8 @@
 import { runIntentAgent } from './intent'
 import { runValidatorAgent } from './validator'
 import { runExplainerAgent } from './explainer'
-import { compileRule } from '../compileRule'
-import { getOrdersCollection } from '../mongo'
+import { runRuleAgainstOrders, type TriageSummary } from '../triage'
 import type { RuleTree } from '#shared/types/rule'
-
-export type TriageSummary = { allow: number; review: number; block: number }
 
 export type PipelineEvent =
   | { stage: 'drafting'; message: string }
@@ -43,17 +40,9 @@ export async function* runRuleGenerationPipeline(description: string): AsyncGene
   const rule = intentResult.rule
 
   yield { stage: 'previewing', message: 'Running the compiled rule against seeded orders…' }
-  let summary: TriageSummary = { allow: 0, review: 0, block: 0 }
+  let summary: TriageSummary
   try {
-    const compiled = compileRule(rule)
-    const orders = await getOrdersCollection()
-    const results = await orders
-      .aggregate([compiled.addFieldsStage, { $project: { action: 1, _id: 0 } }])
-      .toArray()
-    for (const row of results) {
-      const action = row.action as keyof TriageSummary
-      if (action in summary) summary[action]++
-    }
+    ;({ summary } = await runRuleAgainstOrders(rule))
   } catch (err) {
     yield {
       stage: 'error',
