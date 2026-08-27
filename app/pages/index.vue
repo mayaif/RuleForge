@@ -11,12 +11,18 @@
       contradictions, and an explainer agent writes a plain-English summary — the rule compiles to
       a real MongoDB aggregation expression, previewed live against seeded orders.
     </p>
-    <div>
+    <div class="flex flex-wrap gap-3">
       <NuxtLink
         to="/builder"
         class="inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         Open the builder
+      </NuxtLink>
+      <NuxtLink
+        to="/tutorial"
+        class="inline-flex items-center rounded-md border border-input px-5 py-2.5 text-sm font-medium transition hover:bg-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      >
+        New here? Take the tutorial
       </NuxtLink>
     </div>
   </main>
