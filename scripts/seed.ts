@@ -31,25 +31,28 @@ function randomDateWithinDays(daysAgo: number): Date {
  * Weighted so most orders are unremarkable — the point is to have a
  * realistic minority for rules to actually surface. */
 function generateOrder(index: number): Order {
-  const isSuspicious = Math.random() < 0.15
+  // Three independent risk factors, not one bundled "isSuspicious" flag —
+  // real fraud signals overlap sometimes but mostly don't, and a rule builder
+  // demo is much more convincing when different branches actually catch
+  // different orders instead of all lighting up on the same rows.
+  const isLargeNewAccount = Math.random() < 0.12
+  const hasCountryMismatch = Math.random() < 0.12
+  const hasChargebackHistory = Math.random() < 0.08
+
   const billingCountry = pick(COUNTRIES)
-  const countryMismatch = isSuspicious && Math.random() < 0.6
+  const otherCountries = COUNTRIES.filter((c) => c !== billingCountry)
 
   return {
     orderId: `ORD-${String(10000 + index)}`,
     createdAt: randomDateWithinDays(90),
-    amountCents: isSuspicious
-      ? randomInt(30000, 250000)
-      : randomInt(1500, 40000),
+    amountCents: isLargeNewAccount ? randomInt(30000, 250000) : randomInt(1500, 40000),
     currency: pick(CURRENCIES),
     billingCountry,
-    shippingCountry: countryMismatch ? pick(COUNTRIES.filter((c) => c !== billingCountry)) : billingCountry,
-    ipCountry: countryMismatch && Math.random() < 0.5
-      ? pick(COUNTRIES.filter((c) => c !== billingCountry))
-      : billingCountry,
+    shippingCountry: hasCountryMismatch ? pick(otherCountries) : billingCountry,
+    ipCountry: hasCountryMismatch && Math.random() < 0.5 ? pick(otherCountries) : billingCountry,
     paymentMethod: pick(PAYMENT_METHODS),
-    accountAgeDays: isSuspicious ? randomInt(0, 6) : randomInt(7, 1200),
-    priorChargebacks: isSuspicious && Math.random() < 0.3 ? randomInt(1, 3) : 0,
+    accountAgeDays: isLargeNewAccount ? randomInt(0, 6) : randomInt(7, 1200),
+    priorChargebacks: hasChargebackHistory ? randomInt(1, 3) : 0,
     itemCount: randomInt(1, 8),
     customerEmail: `customer${index}@example.com`,
   }
