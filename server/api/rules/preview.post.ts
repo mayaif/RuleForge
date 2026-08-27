@@ -1,4 +1,4 @@
-import { RuleTreeSchema } from '../../../shared/types/rule'
+import { RuleTreeSchema } from '#shared/types/rule'
 import { compileRule } from '../../utils/compileRule'
 import { getOrdersCollection } from '../../utils/mongo'
 

@@ -3,7 +3,7 @@ import { runValidatorAgent } from './validator'
 import { runExplainerAgent } from './explainer'
 import { compileRule } from '../compileRule'
 import { getOrdersCollection } from '../mongo'
-import type { RuleTree } from '../../../shared/types/rule'
+import type { RuleTree } from '#shared/types/rule'
 
 export type TriageSummary = { allow: number; review: number; block: number }
 

@@ -1,6 +1,6 @@
 import { getGroq, INTENT_MODEL, REASONING_PARAMS, extractJson } from '../groq'
-import { RuleTreeSchema, SCHEMA_DESCRIPTION } from '../../../shared/types/rule'
-import type { RuleTree } from '../../../shared/types/rule'
+import { RuleTreeSchema, SCHEMA_DESCRIPTION } from '#shared/types/rule'
+import type { RuleTree } from '#shared/types/rule'
 
 export type IntentResult = { ok: true; rule: RuleTree } | { ok: false; error: string }
 

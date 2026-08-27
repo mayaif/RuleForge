@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const counter = useCounterStore()
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <main id="main-content" class="mx-auto flex min-h-screen max-w-3xl flex-col justify-center gap-6 px-6 py-24">
@@ -13,14 +11,13 @@ const counter = useCounterStore()
       contradictions, and an explainer agent writes a plain-English summary — the rule compiles to
       a real MongoDB aggregation expression, previewed live against seeded orders.
     </p>
-    <div class="flex items-center gap-4">
-      <button
-        type="button"
-        class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground"
-        @click="counter.increment"
+    <div>
+      <NuxtLink
+        to="/builder"
+        class="inline-flex items-center rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
-        Pinia check: {{ counter.count }}
-      </button>
+        Open the builder
+      </NuxtLink>
     </div>
   </main>
 </template>

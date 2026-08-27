@@ -1,5 +1,5 @@
 import { getGroq, EXPLAINER_MODEL, REASONING_PARAMS } from '../groq'
-import type { RuleTree } from '../../../shared/types/rule'
+import type { RuleTree } from '#shared/types/rule'
 
 /** Writes a plain-English walkthrough of a rule tree for a non-technical
  * stakeholder — the guided, human-readable summary a fraud-ops manager

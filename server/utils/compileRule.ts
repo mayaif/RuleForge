@@ -1,7 +1,7 @@
 import type { Document } from 'mongodb'
-import { ORDER_FIELD_NAMES } from '../../shared/types/order'
-import { VALUE_OPS } from '../../shared/types/rule'
-import type { Branch, Condition, RuleTree } from '../../shared/types/rule'
+import { ORDER_FIELD_NAMES } from '#shared/types/order'
+import { VALUE_OPS } from '#shared/types/rule'
+import type { Branch, Condition, RuleTree } from '#shared/types/rule'
 
 const VALUE_OP_TO_MONGO: Record<(typeof VALUE_OPS)[number], string> = {
   eq: '$eq',

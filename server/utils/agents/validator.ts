@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { getGroq, VALIDATOR_MODEL, REASONING_PARAMS, extractJson } from '../groq'
-import type { RuleTree } from '../../../shared/types/rule'
+import type { RuleTree } from '#shared/types/rule'
 
 const ValidatorResponseSchema = z.object({
   approved: z.boolean(),
