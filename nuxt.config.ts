@@ -4,6 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
   css: ['~/assets/css/main.css'],
+  runtimeConfig: {
+    mongodbUri: process.env.MONGODB_URI || '',
+    mongodbDb: process.env.MONGODB_DB || 'ruleforge',
+    groqApiKey: process.env.GROQ_API_KEY || '',
+  },
   app: {
     head: {
       title: 'RuleForge',
