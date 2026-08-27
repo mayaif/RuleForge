@@ -24,7 +24,8 @@ const saveLabel = computed(() => {
 </script>
 
 <template>
-  <div class="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
+  <main id="main-content" class="mx-auto flex max-w-6xl flex-col gap-6 px-6 py-8">
+    <h1 class="sr-only">Rule builder</h1>
     <AiAssist />
 
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -104,5 +105,5 @@ const saveLabel = computed(() => {
 
       <TriageQueue />
     </div>
-  </div>
+  </main>
 </template>

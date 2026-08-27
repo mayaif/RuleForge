@@ -65,8 +65,8 @@ function finish() {
 </script>
 
 <template>
-  <div class="mx-auto flex max-w-2xl flex-col gap-6 px-6 py-8">
-    <h1 id="main-content" class="text-2xl font-semibold">Build your first rule</h1>
+  <main id="main-content" class="mx-auto flex max-w-2xl flex-col gap-6 px-6 py-8">
+    <h1 class="text-2xl font-semibold">Build your first rule</h1>
 
     <ol class="flex gap-2" aria-label="Progress">
       <li v-for="s in totalSteps" :key="s" class="flex-1">
@@ -177,5 +177,5 @@ function finish() {
         </button>
       </div>
     </section>
-  </div>
+  </main>
 </template>

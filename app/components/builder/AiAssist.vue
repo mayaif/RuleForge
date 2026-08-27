@@ -74,7 +74,9 @@ async function run() {
 <template>
   <section aria-labelledby="ai-assist-heading" class="flex flex-col gap-3 rounded-lg border border-border bg-card p-4">
     <h2 id="ai-assist-heading" class="text-sm font-semibold">Describe a rule</h2>
+    <label for="ai-assist-description" class="sr-only">Describe the fraud rule you want in plain English</label>
     <textarea
+      id="ai-assist-description"
       v-model="description"
       rows="2"
       placeholder="e.g. Flag orders over $500 shipping to a different country than billing, from accounts under 7 days old"

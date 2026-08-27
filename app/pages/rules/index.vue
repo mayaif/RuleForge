@@ -25,9 +25,9 @@ async function remove(id: string, name: string) {
 </script>
 
 <template>
-  <div class="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-8">
+  <main id="main-content" class="mx-auto flex max-w-4xl flex-col gap-6 px-6 py-8">
     <div class="flex items-center justify-between">
-      <h1 id="main-content" class="text-2xl font-semibold">Saved rules</h1>
+      <h1 class="text-2xl font-semibold">Saved rules</h1>
       <NuxtLink
         to="/builder"
         class="rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground"
@@ -93,5 +93,5 @@ async function remove(id: string, name: string) {
         </div>
       </li>
     </ul>
-  </div>
+  </main>
 </template>

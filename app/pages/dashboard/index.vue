@@ -26,8 +26,8 @@ function pct(n: number, total: number) {
 </script>
 
 <template>
-  <div class="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-8">
-    <h1 id="main-content" class="text-2xl font-semibold">Risk dashboard</h1>
+  <main id="main-content" class="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-8">
+    <h1 class="text-2xl font-semibold">Risk dashboard</h1>
 
     <p v-if="data === null" class="text-sm text-muted-foreground">Loading…</p>
 
@@ -94,5 +94,5 @@ function pct(n: number, total: number) {
         </ul>
       </section>
     </template>
-  </div>
+  </main>
 </template>
