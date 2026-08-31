@@ -5,17 +5,9 @@
     id="main-content"
     class="mx-auto flex w-full max-w-[1280px] flex-col items-center px-6 pb-24 pt-16 sm:pt-24"
   >
-    <!-- Status badge -->
-    <span
-      class="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground shadow-sm"
-    >
-      <span class="h-2 w-2 rounded-full bg-success"></span>
-      V2.4 Engine Active
-    </span>
-
     <!-- Headline -->
     <h1
-      class="mt-8 text-center font-display text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl"
+      class="text-center font-display text-4xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl"
     >
       Plain English.
       <br />
